@@ -48,3 +48,11 @@
 #define LAPO_KEYS KC_LALT, KC_TRNS, KC_LBRC
 // // Right Alt on hold, ] on tap
 #define RAPC_KEYS KC_RALT, KC_TRNS, KC_RBRC
+
+// Configure the global tapping term (default: 200ms)
+#define TAPPING_TERM 200
+// Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
+#define QUICK_TAP_TERM 0
+// Enable Permissive Holds
+// Allows for mod-tap modifiers to be used in tandem, where one is held and the other is tapped
+#define PERMISSIVE_HOLD
