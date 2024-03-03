@@ -3,6 +3,7 @@
 // Layers
 enum preonic_layers {
     L_BASE,
+    L_BASE_NO_HRM,
     L_LOWER,
     L_RAISE,
     L_MEDIA
@@ -24,6 +25,7 @@ enum preonic_layers {
 
 // Layer Key Aliases
 #define LR_BASE    MO(L_BASE)
+#define LR_GAME    MO(L_BASE_NO_HRM)
 #define LR_LOWER   MO(L_LOWER)
 #define LR_RAISE   MO(L_RAISE)
 #define LR_MEDIA   MO(L_MEDIA)
@@ -47,6 +49,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_GRV,    KC_1,      KC_2,      KC_3,      KC_4,      KC_5,      KC_6,      KC_7,      KC_8,      KC_9,      KC_0,      KC_DEL,
         KC_TAB,    KC_Q,      KC_W,      KC_E,      KC_R,      KC_T,      KC_Y,      KC_U,      KC_I,      KC_O,      KC_P,      KC_ENT,
         KC_ESC,    GUI_A,     ALT_S,     CTL_D,     SFT_F,     KC_G,      KC_H,      SFT_J,     CTL_K,     ALT_L,     GUI_SCLN,  KC_QUOT,
+        KC_LSFT,   KC_Z,      KC_X,      KC_C,      KC_V,      KC_B,      KC_N,      KC_M,      KC_COMM,   KC_DOT,    KC_SLSH,   KC_RSFT,
+        KC_LCTL,   LR_MEDIA,  KC_LALT,   KC_LGUI,   LR_LOWER,  KC_BSPC,   KC_SPC,    LR_RAISE,  KC_LGUI,   KC_RALT,   LR_MEDIA,  KC_RCTL
+    ),
+    /* Base Layer w/o Home Row Mods (For Gaming)
+    *   ╔══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╗
+    *   ║   `  ~   │   1  !   │   2  @   │   3  #   │   4  $   │   5  %   │   6  ^   │   7  &   │   8  *   │   9  (   │   0  )   │  Delete  ║
+    *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
+    *   ║   Tab    │   Q      │   W      │   E      │   R      │   T      │   Y      │   U      │   I      │   O      │   P      │   Enter  ║
+    *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
+    *   ║   Esc    │   A      │   S      │   D      │   F      │   G      │   H      │   J      │   K      │   L      │   ; :    │   '  "   ║
+    *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
+    *   ║   Shift  │   Z      │   X      │   C      │   V      │   B      │   N      │   M      │   ,  <   │   .  >   │   /  ?   │   Shift  ║
+    *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
+    *   ║   Ctrl   │   MEDIA  │   Alt    │   Super  │   LOWER  │   Bksp   │  Space   │   RAISE  │   Super  │   Alt    │   MEDIA  │   Ctrl   ║
+    *   ╚══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╝
+    */
+    [L_BASE] = LAYOUT_ortho_5x12(
+        KC_GRV,    KC_1,      KC_2,      KC_3,      KC_4,      KC_5,      KC_6,      KC_7,      KC_8,      KC_9,      KC_0,      KC_DEL,
+        KC_TAB,    KC_Q,      KC_W,      KC_E,      KC_R,      KC_T,      KC_Y,      KC_U,      KC_I,      KC_O,      KC_P,      KC_ENT,
+        KC_ESC,    KC_A,      KC_S,      KC_D,      KC_F,      KC_G,      KC_H,      KC_J,      KC_K,      KC_L,      KC_SCLN,  KC_QUOT,
         KC_LSFT,   KC_Z,      KC_X,      KC_C,      KC_V,      KC_B,      KC_N,      KC_M,      KC_COMM,   KC_DOT,    KC_SLSH,   KC_RSFT,
         KC_LCTL,   LR_MEDIA,  KC_LALT,   KC_LGUI,   LR_LOWER,  KC_BSPC,   KC_SPC,    LR_RAISE,  KC_LGUI,   KC_RALT,   LR_MEDIA,  KC_RCTL
     ),
@@ -96,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
     *   ║          │          │          │          │          │   Mute   │   Play   │          │  Effect- │  Effect+ │  Rainbow │   Swirl  ║
     *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
-    *   ║          │          │          │          │          │   Vol-   │   Vol+   │          │   Hue-   │   Hue+   │   Snake  │Knight Rid║
+    *   ║ DF Game  │          │          │          │          │   Vol-   │   Vol+   │          │   Hue-   │   Hue+   │   Snake  │Knight Rid║
     *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
     *   ║          │          │          │          │          │ Bright-  │ Bright+  │          │   Sat-   │   Sat+   │ Christmas│ Gradient ║
     *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
@@ -106,7 +128,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [L_MEDIA] = LAYOUT_ortho_5x12(
         XXXXXXX,  XXXXXXX,   XXXXXXX,    XXXXXXX,   XXXXXXX,   KC_MPRV,   KC_MNXT,   XXXXXXX,   RGB_RMOD,  RGB_MOD,   RGB_M_P,   RGB_M_B,
         XXXXXXX,  XXXXXXX,   XXXXXXX,    XXXXXXX,   XXXXXXX,   KC_MUTE,   KC_MPLY,   XXXXXXX,   RGB_SPD,   RGB_SPI,   RGB_M_R,   RGB_M_SW,
-        XXXXXXX,  XXXXXXX,   XXXXXXX,    XXXXXXX,   XXXXXXX,   KC_VOLD,   KC_VOLU,   XXXXXXX,   RGB_HUD,   RGB_HUI,   RGB_M_SN,  RGB_M_K,
+        DF(LR_GAME),  XXXXXXX,   XXXXXXX,    XXXXXXX,   XXXXXXX,   KC_VOLD,   KC_VOLU,   XXXXXXX,   RGB_HUD,   RGB_HUI,   RGB_M_SN,  RGB_M_K,
         XXXXXXX,  XXXXXXX,   XXXXXXX,    XXXXXXX,   XXXXXXX,   KC_BRID,   KC_BRIU,   XXXXXXX,   RGB_SAD,   RGB_SAI,   RGB_M_X,   RGB_M_G,
         XXXXXXX,  _______,   XXXXXXX,    XXXXXXX,   _______,   RGB_TOG,   RGB_TOG,   _______,   RGB_VAD,   RGB_VAI,   RGB_M_T,   RGB_TOG
     ),
