@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 enum layer_names {
     _BASE = 0,
+    _CLMK_DH,
     _NAV,
     _MOUSE,
     _MEDIA,
@@ -30,30 +31,50 @@ enum layer_names {
 };
 
 // Left-hand home row mods
-#define GUI_A LGUI_T(KC_A)
-#define ALT_S LALT_T(KC_S)
-#define CTL_D LCTL_T(KC_D)
-#define SFT_F LSFT_T(KC_F)
+// GUI
+#define GUI_A       LGUI_T(KC_A)
+// Alt
+#define ALT_S       LALT_T(KC_S)
+#define ALT_R       LALT_T(KC_R)
+// Ctrl
+#define CTL_D       LCTL_T(KC_D)
+#define CTL_S       LCTL_T(KC_S)
+// Shft
+#define SFT_F       LSFT_T(KC_F)
+#define SFT_T       LSFT_T(KC_T)
 
 // Right-hand home row mods
-#define SFT_J RSFT_T(KC_J)
-#define CTL_K RCTL_T(KC_K)
-#define ALT_L LALT_T(KC_L)
-#define GUI_SCLN RGUI_T(KC_SCLN)
+// Shft
+#define SFT_J       RSFT_T(KC_J)
+#define SFT_N       RSFT_T(KC_N)
+// Ctrl
+#define CTL_K       RCTL_T(KC_K)
+#define CTL_E       RCTL_T(KC_E)
+// Alt
+#define ALT_L       LALT_T(KC_L)
+#define ALT_I       LALT_T(KC_I)
+// GUI
+#define GUI_SCLN    RGUI_T(KC_SCLN)
+#define GUI_O       RGUI_T(KC_O)
 
 // Layer switching
-#define LS_MOUSE LT(_MOUSE, KC_TAB)
-#define LS_NAV LT(_NAV, KC_BSPC)
-#define LS_MEDIA LT(_MEDIA, KC_ESC)
-#define LS_NUM LT(_NUM, KC_ENT)
-#define LS_SYM LT(_SYM, KC_SPC)
-#define LS_FUN LT(_FUN, KC_DEL)
+#define LS_MOUSE    LT(_MOUSE, KC_TAB)
+#define LS_NAV      LT(_NAV, KC_BSPC)
+#define LS_MEDIA    LT(_MEDIA, KC_ESC)
+#define LS_NUM      LT(_NUM, KC_ENT)
+#define LS_SYM      LT(_SYM, KC_SPC)
+#define LS_FUN      LT(_FUN, KC_DEL)
 
-#define REDO LCTL(KC_Y)
-#define UNDO LCTL(KC_Z)
-#define CUT LCTL(KC_X)
-#define COPY LCTL(KC_C)
-#define PASTE LCTL(KC_V)
+// Common Shortcuts
+#define REDO        LCTL(KC_Y)
+#define UNDO        LCTL(KC_Z)
+#define CUT         LCTL(KC_X)
+#define COPY        LCTL(KC_C)
+#define PASTE       LCTL(KC_V)
+
+// Layouts
+#define QWERTY      DF(_BASE)
+#define CLMK_DH     DF(_CLMK_DH)
 
 
 // TODO: Consider switching Del and Escape
@@ -65,6 +86,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                              LS_MEDIA,LS_NAV,  LS_MOUSE,         LS_NUM,  LS_SYM,  LS_FUN
     ),
 
+    [_CLMK_DH] = LAYOUT_split_3x6_3(
+         XXXXXXX, KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                               KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, XXXXXXX,
+         XXXXXXX, GUI_A,   ALT_R,   CTL_S,   SFT_T,   KC_G,                               KC_M,    SFT_N,   CTL_E,   ALT_I,   GUI_O,   XXXXXXX,
+         XXXXXXX, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                               KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, XXXXXXX,
+                                             LS_MEDIA,LS_NAV,  LS_MOUSE,         LS_NUM,  LS_SYM,  LS_FUN
+    ),
+
     [_NAV] = LAYOUT_split_3x6_3(
          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            KC_INS,  KC_HOME, KC_UP,   KC_END,  KC_PGUP, XXXXXXX,
          XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                            KC_CAPS, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, XXXXXXX,
@@ -73,9 +101,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_MOUSE] = LAYOUT_split_3x6_3(
+         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, KC_WH_D, KC_MS_U, KC_WH_U, XXXXXXX, XXXXXXX,
+         XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                            KC_WH_L, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_R, XXXXXXX,
          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            REDO,    PASTE,   COPY,    CUT,     UNDO,    XXXXXXX,
-         XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                            XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, XXXXXXX,
-         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, XXXXXXX,
                                              XXXXXXX, XXXXXXX, _______,          KC_BTN1, KC_BTN2, KC_BTN3
     ),
 
@@ -101,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_FUN] = LAYOUT_split_3x6_3(
-         XXXXXXX, KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_SYRQ,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+         XXXXXXX, KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_SYRQ,                            XXXXXXX, QWERTY,  CLMK_DH, XXXXXXX, XXXXXXX, XXXXXXX,
          XXXXXXX, KC_F11,  KC_F4,   KC_F5,   KC_F6,   KC_SCRL,                            XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,
          XXXXXXX, KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_PAUS,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                                              KC_APP,  XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, _______
@@ -131,8 +159,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //      *                                              ┗━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛  ┗━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┛
 //      */
 
-// OLED Stuff
-#ifdef OLED_ENABLE
+// // OLED Stuff
+// #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master()) {
     return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
@@ -144,7 +172,10 @@ void oled_render_layer_state(void) {
     oled_write_P(PSTR("Layer: "), false);
     switch (get_highest_layer(layer_state)) {
         case _BASE:
-            oled_write_ln_P(PSTR("Default"), false);
+            oled_write_ln_P(PSTR("QWERTY"), false);
+            break;
+        case _CLMK_DH:
+            oled_write_ln_P(PSTR("Colemak-DH"), false);
             break;
         case _NAV:
             oled_write_ln_P(PSTR("Navigation"), false);
@@ -163,6 +194,9 @@ void oled_render_layer_state(void) {
             break;
         case _FUN:
             oled_write_ln_P(PSTR("Function"), false);
+            break;
+        default:
+            oled_write_ln_P(PSTR("Unknown"), false);
             break;
     }
 }
@@ -185,4 +219,4 @@ bool oled_task_user(void) {
     return false;
 }
 
-#endif // OLED_ENABLE
+// #endif // OLED_ENABLE

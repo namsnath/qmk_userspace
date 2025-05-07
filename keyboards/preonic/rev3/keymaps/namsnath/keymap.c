@@ -4,8 +4,9 @@
 enum preonic_layers {
     L_BASE,
     L_BASE_NO_HRM,
-    L_LOWER,
+    L_MAC,
     L_RAISE,
+    L_LOWER,
     L_MEDIA
 };
 
@@ -26,8 +27,8 @@ enum preonic_layers {
 // Layer Key Aliases
 #define LR_BASE    MO(L_BASE)
 #define LR_GAME    MO(L_BASE_NO_HRM)
-#define LR_LOWER   MO(L_LOWER)
 #define LR_RAISE   MO(L_RAISE)
+#define LR_LOWER   MO(L_LOWER)
 #define LR_MEDIA   MO(L_MEDIA)
 
 // Keymap
@@ -60,37 +61,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
     *   ║   Esc    │   A      │   S      │   D      │   F      │   G      │   H      │   J      │   K      │   L      │   ; :    │   '  "   ║
     *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
-    *   ║   Shift  │   Z      │   X      │   C      │   V      │   B      │   N      │   M      │   ,  <   │   .  >   │   /  ?   │   Shift  ║
+    *   ║    ▼     │   Z      │   X      │   C      │   V      │   B      │   N      │   M      │   ,  <   │   .  >   │   /  ?   │    ▼     ║
     *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
-    *   ║   Ctrl   │   MEDIA  │   Alt    │   Super  │   LOWER  │   Bksp   │  Space   │   RAISE  │   Super  │   Alt    │   MEDIA  │   Ctrl   ║
+    *   ║    ▼     │    ▼     │    ▼     │    ▼     │    ▼     │    ▼     │    ▼     │    ▼     │    ▼     │    ▼     │    ▼     │    ▼     ║
     *   ╚══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╝
     */
     [L_BASE_NO_HRM] = LAYOUT_ortho_5x12(
         KC_GRV,    KC_1,      KC_2,      KC_3,      KC_4,      KC_5,      KC_6,      KC_7,      KC_8,      KC_9,      KC_0,      KC_DEL,
         KC_TAB,    KC_Q,      KC_W,      KC_E,      KC_R,      KC_T,      KC_Y,      KC_U,      KC_I,      KC_O,      KC_P,      KC_ENT,
-        KC_ESC,    KC_A,      KC_S,      KC_D,      KC_F,      KC_G,      KC_H,      KC_J,      KC_K,      KC_L,      KC_SCLN,  KC_QUOT,
-        KC_LSFT,   KC_Z,      KC_X,      KC_C,      KC_V,      KC_B,      KC_N,      KC_M,      KC_COMM,   KC_DOT,    KC_SLSH,   KC_RSFT,
-        KC_LCTL,   LR_MEDIA,  KC_LALT,   KC_LGUI,   LR_LOWER,  KC_BSPC,   KC_SPC,    LR_RAISE,  KC_LGUI,   KC_RALT,   LR_MEDIA,  KC_RCTL
-    ),
-    /* Lower Layer
-    *   ╔══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╗
-    *   ║   F11    │   F1     │   F2     │   F3     │   F4     │   F5     │   F6     │   F7     │   F8     │   F9     │   F10    │    ▼     ║
-    *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
-    *   ║   F12    │          │          │          │          │  PrntScr │  PrntScr │    +     │   7      │   8      │   9      │    *     ║
-    *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
-    *   ║          │          │          │          │          │   Home   │   End    │    -     │   4      │   5      │   6      │    /     ║
-    *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
-    *   ║          │          │          │          │  Insert  │   PgUp   │  PgDwn   │  Delete  │   1      │   2      │   3      │          ║
-    *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
-    *   ║          │    ▼     │          │          │    ▼     │    ▼     │    ▼     │    ▼     │          │   0      │   .  >   │   Enter  ║
-    *   ╚══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╝
-    */
-    [L_LOWER] = LAYOUT_ortho_5x12(
-        KC_F11,    KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,     KC_F6,     KC_F7,     KC_F8,     KC_F9,     KC_F10,    _______,
-        KC_F12,    XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_PSCR,   KC_PSCR,   KC_PLUS,   KC_P7,     KC_P8,     KC_P9,     KC_ASTR,
-        XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_HOME,   KC_END,    KC_MINS,   KC_P4,     KC_P5,     KC_P6,     KC_SLSH,
-        XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_INS,    KC_PGUP,   KC_PGDN,   KC_DEL,    KC_P1,     KC_P2,     KC_P3,     XXXXXXX,
-        XXXXXXX,   _______,   XXXXXXX,   XXXXXXX,   _______,   _______,   _______,   _______,   XXXXXXX,   KC_P0,     KC_DOT,    KC_ENT
+        _______,   KC_A,      KC_S,      KC_D,      KC_F,      KC_G,      KC_H,      KC_J,      KC_K,      KC_L,      KC_SCLN,   KC_QUOT,
+        _______,   KC_Z,      KC_X,      KC_C,      KC_V,      KC_B,      KC_N,      KC_M,      KC_COMM,   KC_DOT,    KC_SLSH,   _______,
+        _______,  _______,    _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______
     ),
     /* Raise Layer
     *   ╔══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╗
@@ -111,6 +92,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LPRN,   KC_RPRN,   KC_SLSH,   KC_COLN,   KC_LEFT,   KC_DOWN,    KC_RGHT,  XXXXXXX,    XXXXXXX,
         _______,   XXXXXXX,   XXXXXXX,   KC_LCBR,   KC_RCBR,   KC_BSLS,   KC_PIPE,   KC_UNDS,   XXXXXXX,    KC_EQL,   XXXXXXX,    _______,
         _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______,    _______,  _______,    _______
+    ),
+    /* Lower Layer
+    *   ╔══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╗
+    *   ║   F11    │   F1     │   F2     │   F3     │   F4     │   F5     │   F6     │   F7     │   F8     │   F9     │   F10    │    ▼     ║
+    *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
+    *   ║   F12    │          │          │          │          │  PrntScr │  PrntScr │    +     │   7      │   8      │   9      │    *     ║
+    *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
+    *   ║          │          │          │          │          │   Home   │   End    │    -     │   4      │   5      │   6      │    /     ║
+    *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
+    *   ║          │          │          │          │  Insert  │   PgUp   │  PgDwn   │  Delete  │   1      │   2      │   3      │          ║
+    *   ╟──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────╢
+    *   ║          │          │          │          │    ▼     │    ▼     │    ▼     │    ▼     │          │   0      │   .  >   │   Enter  ║
+    *   ╚══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╧══════════╝
+    */
+    [L_LOWER] = LAYOUT_ortho_5x12(
+        KC_F11,    KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,     KC_F6,     KC_F7,     KC_F8,     KC_F9,     KC_F10,    _______,
+        KC_F12,    XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_PSCR,   KC_PSCR,   KC_PLUS,   KC_P7,     KC_P8,     KC_P9,     KC_ASTR,
+        XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_HOME,   KC_END,    KC_MINS,   KC_P4,     KC_P5,     KC_P6,     KC_SLSH,
+        XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_INS,    KC_PGUP,   KC_PGDN,   KC_DEL,    KC_P1,     KC_P2,     KC_P3,     XXXXXXX,
+        XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   _______,   _______,   _______,   _______,   XXXXXXX,   KC_P0,     KC_DOT,    KC_ENT
     ),
     /* Media Layer
     *   ╔══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╤══════════╗
